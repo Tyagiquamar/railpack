@@ -96,7 +96,12 @@ func (p *DotnetProvider) getPublishedOutputName(ctx *generate.GenerateContext, p
 				}
 			}
 		}
+		// If AssemblyName is empty, log a warning and fall back to project name
+		if project.AssemblyName == "" {
+			ctx.App.Logger().LogWarn("AssemblyName not set in %s, falling back to project name", projFile)
+		}
 	}
+	// If ReadFile failed, log and fall back to project name
 	return projName
 }
 
