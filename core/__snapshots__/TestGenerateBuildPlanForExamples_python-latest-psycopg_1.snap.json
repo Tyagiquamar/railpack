@@ -55,6 +55,10 @@
    "RAILPACK_VERSION": "dev"
   }
  },
+ "exclude": [
+  ".venv",
+  "venv"
+ ],
  "steps": [
   {
    "caches": [
@@ -69,7 +73,7 @@
    ],
    "inputs": [
     {
-     "image": "ghcr.io/railwayapp/railpack-builder:mise-2026.10.3"
+     "image": "ghcr.io/railwayapp/railpack-builder:mise-2026.10.11"
     }
    ],
    "name": "packages:apt:build"
@@ -188,7 +192,7 @@
    ],
    "inputs": [
     {
-     "image": "ghcr.io/railwayapp/railpack-runtime:mise-2026.10.3"
+     "image": "ghcr.io/railwayapp/railpack-runtime:mise-2026.10.11"
     }
    ],
    "name": "packages:apt:runtime"

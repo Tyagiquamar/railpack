@@ -34,11 +34,19 @@ Follow these instructions carefully when writing code:
   pnpm-lock.yaml, etc.). Always use the respective package manager to generate
   or update lockfiles. Manual edits can result in invalid checksums and broken
   builds.
+- When setting a framework's environment variables, use the exact values that
+  framework documents and add a 1-2 line comment saying why those values are
+  required. Put reference URLs on their own comment line. Do not reuse another
+  framework's spellings (`production` vs `prod`, `false` vs `0`): a lookalike
+  value can select a different mode or stay truthy.
 
 # Workflow
 
 - If mise is not available in your environment, [install it](https://mise.jdx.dev/installing-mise.html)
 - Take a careful look at @mise.toml to understand what commands should be run at different points in the project lifecycle
+- Before every change to a Mise TOML configuration file or Mise task, consult
+  the [Mise documentation index](https://mise.jdx.dev/llms.txt) and read the
+  relevant linked documentation to verify the syntax and behavior being changed.
 - Do not worry about docker cache, etc. Never run `docker system prune` or other similar commands.
 - Do not run `go` directly. Instead, inspect @mise.toml and use `mise run <task>` to run various dev lifecycle commands. For instance, you should not run `go vet`, `go fmt`, `go test`, etc directly.
 - After making code changes, run `mise run check`
@@ -76,7 +84,8 @@ There are normal unit tests, snapshot tests, and integration tests. The integrat
 
 ## Unit tests
 
-* Do not test log output.
+* Do not assert that specific log messages exist unless asked.
+* Name a test after the behavior it checks. Do not use a generic name such as `TestZig` when the function checks detection, a start command, or another specific outcome.
 
 # Documentation
 
